@@ -127,7 +127,7 @@
       ),
       s:(
         h: 20,
-        v: 10
+        v: 20
       )
     ),
     wide:(
@@ -180,7 +180,8 @@
   //   * gr_wrapper__flex
   //
   // -------------------------------------------------------------------
-  $horizPercentageGutter: false;
+
+  $horizPercentageGutter: true;
   $vertPercentageGutter: false;
   $maxColumnNum: 6;
   $layoutStyle: 'inline-table'; //float or inline-table or inline-block or flex(flex is beta)
@@ -227,8 +228,8 @@
           &#{$wrp}__mdCol#{$j}{
             @include MQ(m){
               .gr_col{
-                @include childCol($j, $horizSmGtr, false);
-                margin-right: addPxUnit($horizSmGtr);
+                @include childCol($j, $horizMdGtr, false);
+                margin-right: addPxUnit($horizMdGtr);
               }
             }
             @include MQ(s){
