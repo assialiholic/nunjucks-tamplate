@@ -14,7 +14,7 @@
   }
 }
 
-@mixin centering() {
+@mixin contentCentering() {
   max-width: $contWidth;
   padding-right: $contSpace;
   padding-left: $contSpace;

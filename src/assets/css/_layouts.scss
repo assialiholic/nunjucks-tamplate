@@ -5,7 +5,7 @@
   background-color: #aaa;
 
   &_inner{
-    @include centering();
+    @include contentCentering();
     text-align: center;
   }
 }
@@ -14,7 +14,7 @@
 // Body
 // -------------------------------------------------------------------
 .ly_body {
-  @include centering();
+  @include contentCentering();
 }
 
 
@@ -25,7 +25,7 @@
   background-color: #aaa;
 
   &_inner{
-    @include centering();
+    @include contentCentering();
     text-align: center;
   }
 }
