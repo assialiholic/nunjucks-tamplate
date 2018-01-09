@@ -1,13 +1,13 @@
 const gulp = require('gulp'),
-    runSequence = require('run-sequence'),
-    browserSync = require('browser-sync'),
-    through2 = require('through2'),
-    rimraf = require('rimraf'),
-    p = require('gulp-load-plugins')();
+      runSequence = require('run-sequence'),
+      browserSync = require('browser-sync'),
+      through2 = require('through2'),
+      rimraf = require('rimraf'),
+      p = require('gulp-load-plugins')();
 
 const SRC = 'src',
-    DEST = 'public_html',
-    GUIDE = 'style_guide';
+      DEST = 'public_html',
+      GUIDE = 'style_guide';
 
 function plumberNotify(){
   return p.plumber({errorHandler: p.notify.onError("<%= error.message %>")});
