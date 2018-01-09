@@ -30,44 +30,9 @@ gulp.task('njk', function(){
 });
 
 
-//ソースの品質チェック（ベータ）
-gulp.task('check', ['njk', 'comb'], function(){
-  return gulp.src([
-    DEST + '/**/*.html'
-  ])
-    .pipe(p.using())
-    .pipe(plumberNotify())
-    .pipe(p.w3cjs())
-    .pipe(through2.obj(function(file, enc, cb){
-        cb(null, file);
-        if (!file.w3cjs.success){
-          file.pipe(p.notify('HTML validation error(s) found'));
-        }
-    }))
-});
-
-
 // -------------------------------------------------------------------
 // CSS
 // -------------------------------------------------------------------
-//scssファイルをcomb
-gulp.task('comb', function () {
-  return gulp.src([
-    SRC + '/**/*.scss',
-    '!src/**/_vars.scss',
-    '!src/**/_functions.scss',
-    '!src/**/_mixins.scss',
-    '!src/**/_base.scss',
-    '!src/**/_helper.scss'
-  ],{
-    base: SRC
-  })
-  .pipe(p.using())
-  .pipe(plumberNotify())
-  .pipe(p.csscomb())
-  .pipe(gulp.dest(SRC))
-});
-
 
 //sassのコンパイル
 gulp.task('sass', function () {
@@ -167,46 +132,3 @@ gulp.task('default', function (cb) {
     cb
   );
 });
-
-
-
-// -------------------------------------------------------------------
-// スタイルガイド
-// -------------------------------------------------------------------
-
-//スタイルガイド用sassのコンパイル
-gulp.task('aigis-sass', function () {
-  return gulp.src([
-    GUIDE + '/**/*.scss'
-  ])
-  // .pipe(p.cached())
-  .pipe(p.using())
-  .pipe(plumberNotify())
-  .pipe(p.csscomb())
-  .pipe(p.sass({outputStyle: 'expanded'}).on('error', p.sass.logError))
-  .pipe(gulp.dest(GUIDE))
-});
-
-//aigisの実行
-gulp.task('aigis-compile', ['aigis-sass'], function(){
-  return gulp.src(GUIDE + '/aigis_config.yml')
-    .pipe(p.using())
-    .pipe(plumberNotify())
-    .pipe(p.aigis())
-    .pipe(gulp.dest(GUIDE))
-});
-
-//aigis実行、CSSのasset文字列置換
-gulp.task('aigis', ['aigis-compile'], function(){
-  return gulp.src(GUIDE + '/styleguide/asset/css/style.css')
-    .pipe(p.using())
-    .pipe(plumberNotify())
-    .pipe(p.replace('/asset', '../../asset'))
-    .pipe(gulp.dest(GUIDE + '/styleguide/asset/css/'))
-});
-
-//スタイルガイドの生成
-gulp.task('style', ['aigis'], function(){
-  gulp.watch([GUIDE + '/**/*.scss'], ['aigis']);
-});
-
