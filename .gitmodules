@@ -1,0 +1,6 @@
+[submodule "src/assets/test"]
+	path = src/assets/test
+	url = https://github.com/assialiholic/precss-elements.git
+[submodule "src/assets/css"]
+	path = src/assets/css
+	url = https://github.com/assialiholic/precss-elements.git
