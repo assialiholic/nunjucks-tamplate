@@ -45,3 +45,9 @@
     margin-bottom: 0!important;
   }
 }
+
+@mixin lastMR0(){
+  > *:last-child {
+    margin-right: 0!important;
+  }
+}
