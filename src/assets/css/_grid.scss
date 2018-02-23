@@ -3,7 +3,7 @@
 @mixin childCol($col:0, $gutter:0, $mq:true){
   $width: (100/$col);
   @if unit($gutter) == '%'{
-    width: round-decimal(($width - ($gutter * ($col - 1) / $col)), 3);
+    width: roundDecimal(($width - ($gutter * ($col - 1) / $col)), 3);
     &:nth-of-type(#{$col}n){
       margin-right: 0;
     }

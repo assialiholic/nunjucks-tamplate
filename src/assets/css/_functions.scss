@@ -1,5 +1,59 @@
 // Math
 // -------------------------------------------------------------------
+
+//
+// 任意の桁数の丸めを制御
+// https://terkel.jp/archives/2012/12/decimal-digits-and-rounding-sass-function/
+// -------------------------------------------------------------------
+//
+@function toFixed($num, $digits: 0, $style: 'round') {
+  $n: 1;
+  // $num must be a number
+  @if type-of($num) != number {
+    @warn '#{ $num } is not a number.';
+    @return $num;
+  }
+  // $digits must be a unitless number
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $num;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $num;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @if $style == 'round' {
+    @return round($num * $n) / $n;
+  } @else if $style == 'ceil' {
+    @return ceil($num * $n) / $n;
+  } @else if $style == 'floor' {
+    @return floor($num * $n) / $n;
+  } @else {
+    @warn '#{ $style } is undefined keyword.';
+    @return $num;
+  }
+}
+// Round (四捨五入)
+@function roundDecimal($num, $digits: 0) {
+    @return toFixed($num, $digits, 'round');
+}
+
+// Ceil (切り上げ)
+@function ceilDecimal($num, $digits: 0) {
+  @return toFixed($num, $digits, 'ceil');
+}
+
+// Floor (切り捨て)
+@function floorDecimal($num, $digits: 0) {
+  @return toFixed($num, $digits, 'floor');
+}
+
+
+// -------------------------------------------------------------------
+// Utility
+// -------------------------------------------------------------------
 @function addPxUnit($value){
   @if(unit($value) == '%'){
     @return $value;
@@ -8,69 +62,60 @@
   }
 }
 
-@function to-fixed ($number, $digits: 0, $round: 'round') {
-    $n: 1;
-    // $number must be a number
-    @if type-of($number) != number {
-        @warn '#{ $number } is not a number.';
-        @return $number;
-    }
-    // $digits must be a unitless number
-    @if type-of($digits) != number {
-        @warn '#{ $digits } is not a number.';
-        @return $number;
-    } @else if not unitless($digits) {
-        @warn '#{ $digits } has a unit.';
-        @return $number;
-    }
-    @for $i from 1 through $digits {
-        $n: $n * 10;
-    }
-    @if $round == 'round' {
-        @return round($number * $n) / $n;
-    } @else if $round == 'ceil' {
-        @return ceil($number * $n) / $n;
-    } @else if $round == 'floor' {
-        @return floor($number * $n) / $n;
-    } @else {
-        @warn '#{ $round } is undefined keyword.';
-        @return $number;
-    }
+// 単位の削除
+@function stripUnit($num) {
+  @if type-of($num) == 'number' and not unitless($num) {
+    @return $num / ($num * 0 + 1);
+  }
+  @return $num;
 }
 
-// Round (四捨五入)
-@function round-decimal ($number, $digits: 0) {
-    @return to-fixed($number, $digits, 'round');
+@function convertToPxValue($num){
+  @if unit($fz) == 'px'{
+    @return stripUnit($num);
+  } @else {
+    @return ($num / ((floor($num) * 2) % 2 + 1)) * 10;
+  }
 }
 
 
 
-
+// -------------------------------------------------------------------
 // Modules
 // -------------------------------------------------------------------
 
 //
 // 親要素に対するパーセンテージを算出します。第二引数は省略すると、サイトのコンテンツ幅を参照します。
 // @num {number} その要素の横幅
-// @contWidthValue {number} 分母に入る横幅（デフォルト値:$$contWidthValue）
+// @contWidthValue {number} 分母に入る横幅
 //
 @function percentToCont($num, $contWidthValue:$contWidthValue) {
   @return ($num/$contWidthValue) * 100%;
 }
 
-// Padding/Margin
+
 // -------------------------------------------------------------------
+// Spacing
+// -------------------------------------------------------------------
+
+//
+// half-leadingを算出します。
+// @fz {string} その要素のfont-size
+// @lh {number} その要素のline-height
+//
+@function halfLeading($fz, $lh){
+  @return ($fz * $lh - $fz) / 2;
+}
 
 //
 // 主にpadding-top・padding-bottomに使用します。
 // 第一引数に要素が最終的に取って欲しい高さを入れると、自動的にその高さになるようpadding値を算出します。
 // @num {number} 最終的に取って欲しい高さ
-// @fz {string} その要素のfont-size（デフォルト値:$fz）
-// @lh {number} その要素のline-height（デフォルト値:$lh）
+// @fz {string} その要素のfont-size
+// @lh {number} その要素のline-height
 //
 @function totalPadHeight($num, $fz:$fz, $lh:$lh){
-  //px変換し、単位を除く値のみを取得
-  $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
+  $fz: convertToPxValue($fz);
   $lh: $fz * $lh;
   @return ($num - $lh) / 2 + px;
 }
@@ -79,13 +124,14 @@
 //
 // half-leadingを考慮し、見た目上で空いて欲しい余白になるよう値を自動算出します
 // @num {number} 最終的に空いて欲しい値
-// @fz {string} その要素のfont-size（デフォルト値:$fz）
-// @lh {number} その要素のline-height（デフォルト値:$lh）
+// @fz {string} その要素のfont-size
+// @lh {number} その要素のline-height
 //
 @function autoSpace($num:0, $fz:$fz, $lh:$lh){
-  //px変換し、単位を除く値のみを取得
-  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  @return $num - (($lh * $fzValue - $fzValue)/2) + px;
+  $fz: convertToPxValue($fz);
+  $halfLeading: halfLeading($fz, $lh);
+
+  @return $num - $halfLeading + px;
 }
 
 
@@ -98,22 +144,12 @@
 // @lh2 {number} 後続要素のline-height
 //
 @function autoSpace2($num:0, $fz:$fz, $fz2:$fz, $lh:$lh, $lh2:$lh){
-  $fzValue: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  $autoSpaceValue: $num - (($lh * $fzValue - $fzValue)/2);
+  $fz: convertToPxValue($fz);
+  $halfLeading1: halfLeading($fz, $lh);
+  $autoSpaceValue: $num - $halfLeading1;
 
-  $fz2Value: ($fz2 / ((floor($fz2) * 2) % 2 + 1)) * 10;
-  $nextHalfLineHeight: (($fz2Value * $lh2) - $fz2Value) / 2;
+  $fz2: convertToPxValue($fz);
+  $halfLeading2: halfLeading($fz2, $lh2);
 
-  @return $autoSpaceValue - $nextHalfLineHeight + px;
-}
-
-
-//
-// Half leadingを算出します。
-// @fz {string} その要素のfont-size（デフォルト値:$fz）
-// @lh {number} その要素のline-height（デフォルト値:$lh）
-//
-@function halfLeading($fz:$fz, $lh:$lh){
-  $fz: ($fz / ((floor($fz) * 2) % 2 + 1)) * 10;
-  @return (($fz * $lh) - $fz) / 2 + px;
+  @return $autoSpaceValue - $halfLeading2 + px;
 }
