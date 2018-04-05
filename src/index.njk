@@ -12,7 +12,96 @@
 {%- call macros.ly_body(ly_body_data) %}
 
   {%- set el_pageTtl_data = {
-    ttl: 'Grids'
+    ttl: 'Mixin Grid'
+  } %}
+  {{ macros.el_pageTtl(el_pageTtl_data) }}
+
+やることは、これだけ。
+<pre style="padding: 10px; margin: 20px 0; background-color: #efefef; font-size: 14px;">
+  .bl_cardUnit {
+    @include makeChildColum(
+      $lc: 5,                //PCビュー時のカラム数
+      $lh: 40,               //PCビュー時の水平ガター
+      $lv: 50,               //PCビュー時の垂直ガター
+      $mc: 3,                //タブレットビュー時のカラム数
+      $mh: 30,               //タブレットビュー時の水平ガター
+      $mv: 40,               //タブレットビュー時の垂直ガター
+      $sc: 2,                //SPビュー時のカラム数
+      $sh: 10,               //SPビュー時の水平ガター
+      $sv: 40,               //SPビュー時の垂直ガター
+      $childElm: '.bl_card'  //カラムを形成したい子要素の指定
+    );
+  }
+</pre>
+
+  <div class="bl_cardUnit">
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+    <div class="bl_card">
+      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
+      <p>
+        Anything can come here
+      </p>
+    </div>
+    <!-- /.bl_card -->
+  </div>
+  <!-- /.bl_cardUnit -->
+
+
+
+
+
+<br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+  {%- set el_pageTtl_data = {
+    ttl: 'Strict Grid'
   } %}
   {{ macros.el_pageTtl(el_pageTtl_data) }}
 
@@ -23,7 +112,7 @@
     First, add 'gr_wrapper' class to wrapper.
 
     ## Choose Column Number
-    This number depends on $maxColumnNum.
+    This number depends on $maxColNum.
 
     * gr_wrapper__col2
     * gr_wrapper__col3
@@ -39,7 +128,7 @@
 
     ## Choose Column Number in media-queries
     Columns will be one by default in $breakpoint-sm.
-    This number depends on $maxColumnNum too.
+    This number depends on $maxColNum too.
     * gr_wrapper__mdCol2
     * gr_wrapper__mdCol3
     * gr_wrapper__smCol2
@@ -110,37 +199,9 @@
       } %}
       {{ macros.bl_card(bl_card_data) }}
     {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-
   {%- endcall %}
   {# gr_wrapper #}
+
 
   <p class="hp_tac">
     {%- set el_btn_data = {
