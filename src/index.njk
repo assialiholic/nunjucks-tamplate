@@ -9,216 +9,398 @@
 {%- include './_inc/_head.njk' %}
 {%- include './_inc/_header.njk' %}
 
-{%- call macros.ly_body(ly_body_data) %}
-
-  {%- set el_pageTtl_data = {
-    ttl: 'Mixin Grid'
-  } %}
-  {{ macros.el_pageTtl(el_pageTtl_data) }}
-
-やることは、これだけ。
-<pre style="padding: 10px; margin: 20px 0; background-color: #efefef; font-size: 14px;">
-  .bl_cardUnit {
-    @include makeChildColum(
-      $lc: 5,                //PCビュー時のカラム数
-      $lh: 40,               //PCビュー時の水平ガター
-      $lv: 50,               //PCビュー時の垂直ガター
-      $mc: 3,                //タブレットビュー時のカラム数
-      $mh: 30,               //タブレットビュー時の水平ガター
-      $mv: 40,               //タブレットビュー時の垂直ガター
-      $sc: 2,                //SPビュー時のカラム数
-      $sh: 10,               //SPビュー時の水平ガター
-      $sv: 40,               //SPビュー時の垂直ガター
-      $childElm: '.bl_card'  //カラムを形成したい子要素の指定
-    );
-  }
-</pre>
-
-  <div class="bl_cardUnit">
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-    <div class="bl_card">
-      <img src="http://placehold.jp/400x300.png?text=image" alt="Anything can come here">
-      <p>
-        Anything can come here
-      </p>
-    </div>
-    <!-- /.bl_card -->
-  </div>
-  <!-- /.bl_cardUnit -->
-
-
-
-
-
-<br><br><br><br><br><br><br>
-
-
-
-
-
-
-
-
-  {%- set el_pageTtl_data = {
-    ttl: 'Strict Grid'
-  } %}
-  {{ macros.el_pageTtl(el_pageTtl_data) }}
-
-  <!--
-    How to use Grids System
-
-    ## Initialze
-    First, add 'gr_wrapper' class to wrapper.
-
-    ## Choose Column Number
-    This number depends on $maxColNum.
-
-    * gr_wrapper__col2
-    * gr_wrapper__col3
-    * gr_wrapper__col4 ...
-
-    ## Adjust gutter if you like
-    you can also adjust modifier names and gutter values.
-
-    * gr_wrapper__xNarrow
-    * gr_wrapper__narrow
-    * gr_wrapper__wide
-    * gr_wrapper__xWide
-
-    ## Choose Column Number in media-queries
-    Columns will be one by default in $breakpoint-sm.
-    This number depends on $maxColNum too.
-    * gr_wrapper__mdCol2
-    * gr_wrapper__mdCol3
-    * gr_wrapper__smCol2
-    * gr_wrapper__smCol3 ...
-    * gr_wrapper__xWide
-
-    ## Choose layout style
-    The default is depends on layoutStyle, but you can always choose other one with modifier.
-    * gr_wrapper__float
-    * gr_wrapper__inlineTable
-    * gr_wrapper__inlineBlock
-    * gr_wrapper__flex
-
-    ## That's it!
-    This is the one ↓
-  -->
-  {%- set gr_wrapper_data = {
-    ex_class: 'gr_wrapper__col5 gr_wrapper__narrow gr_wrapper__mdCol3 gr_wrapper__smCol2'
-  } %}
-  {%- call macros.gr_wrapper(gr_wrapper_data) %}
-
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
-    {%- call macros.gr_col(gr_col_data) %}
-      {%- set bl_card_data = {
-        ttl: 'Anything can come in .gr_col',
-        img: 'http://placehold.jp/400x300.png?text=image'
-      } %}
-      {{ macros.bl_card(bl_card_data) }}
-    {%- endcall %}
+{%- call macros.ly_body() %}
+  {%- call macros.bl_sect() %}
+    {%- set bl_pageTtl_data = {
+      ttl: 'PRECSS Elements',
+      cap: 'PRECSS Elementsは「ちょっと足りない」Sassフレームワーク/HTMLボイラープレートです。<br>提唱しているのは「モジュールとコードの設計の仕方」で、必要最低限のモジュールしか用意していません。<br>つまりスクラッチでデザインを再現していくような案件に向いているということです。<br>メインはSassの強力なfunctionとmixin、それが生み出したグリッドシステムです。'
+    } %}
+    {{ macros.bl_pageTtl(bl_pageTtl_data) }}
   {%- endcall %}
-  {# gr_wrapper #}
-
-
-  <p class="hp_tac">
-    {%- set el_btn_data = {
-      ttl: 'Click me',
-      url: '#'
-    } %}
-    {{ macros.el_btn(el_btn_data) }}
-
-    {%- set el_btn_data = {
-      ttl: 'Click me',
-      url: '#',
-      ex_class: 'el_btn__red'
-    } %}
-    {{ macros.el_btn(el_btn_data) }}
-  </p>
-
+  {# bl_sect #}
 {%- endcall %}
 {# ly_body #}
+
+
+{# ==========================================================================
+  Section 1
+  ========================================================================== #}
+<div class="hp_bgcCherryBlossom">
+  {%- set ly_body_data = {
+    tag: 'section',
+    ex_class: 'hp_bgcGray'
+  } %}
+  {%- call macros.ly_body(ly_body_data) %}
+    {%- call macros.bl_sect() %}
+      {%- set el_sectTtl_data = {
+        ttl: 'Elements List'
+      } %}
+      {{ macros.el_sectTtl(el_sectTtl_data) }}
+
+
+      {%- set el_sectTtl02_data = {
+        ttl: 'Buttons'
+      } %}
+      {{ macros.el_sectTtl02(el_sectTtl02_data) }}
+      {%- set el_btn_data = {
+        ttl: 'Click me',
+        url: '#'
+      } %}
+      {{ macros.el_btn(el_btn_data) }}
+      {%- set el_btn_data = {
+        ttl: 'Click me',
+        url: '#',
+        ex_class: 'el_btn__red'
+      } %}
+      {{ macros.el_btn(el_btn_data) }}
+
+
+      {%- set el_sectTtl02_data = {
+        ttl: 'Labels'
+      } %}
+      {{ macros.el_sectTtl02(el_sectTtl02_data) }}
+      {%- set bl_inlineLabelList_data = {
+        items: [
+          {
+            ttl: 'Label',
+            url: '#'
+          },
+          {
+            ttl: 'Label',
+            url: '#',
+            ex_class: 'el_label__red'
+          }
+        ]
+      } %}
+      {{ macros.bl_inlineLabelList(bl_inlineLabelList_data) }}
+
+
+      {%- set el_sectTtl02_data = {
+        ttl: 'Blocks'
+      } %}
+      {{ macros.el_sectTtl02(el_sectTtl02_data) }}
+      {%- set gr_wrapper_data = {
+        ex_class: 'gr_wrapper__col4 gr_wrapper__narrow hp_mb40'
+      } %}
+      {%- call macros.gr_wrapper(gr_wrapper_data) %}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_bordered_data = {
+            txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, culpa deleniti dignissimos dolore et expedita fugit harum illum magni nesciunt odio pariatur perferendis praesentium quidem tempora tempore ut voluptas.'
+          } %}
+          {{ macros.bl_bordered(bl_bordered_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_bgc_data = {
+            txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, culpa deleniti dignissimos dolore et expedita fugit harum illum magni nesciunt odio pariatur perferendis praesentium quidem tempora tempore ut voluptas.'
+          } %}
+          {{ macros.bl_bgc(bl_bgc_data) }}
+        {%- endcall %}
+        {# gr_col #}
+      {%- endcall %}
+      {# gr_wrapper #}
+
+      {%- set bl_half_data = {
+        ttl: 'Title here',
+        txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, culpa deleniti dignissimos dolore et expedita fugit harum illum magni nesciunt odio pariatur perferendis praesentium quidem tempora tempore ut voluptas.',
+        img: {
+          src: 'http://placehold.jp/400x400.png?text=image'
+        },
+        el_btn: {
+          ex_class: 'el_btn__red',
+          ttl: 'Click me',
+          url: '#'
+        }
+      } %}
+      {{ macros.bl_half(bl_half_data) }}
+
+      {%- set bl_half_data = {
+        ex_class: 'bl_half__rev',
+        ttl: 'Title here',
+        txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, culpa deleniti dignissimos dolore et expedita fugit harum illum magni nesciunt odio pariatur perferendis praesentium quidem tempora tempore ut voluptas.',
+        img: {
+          src: 'http://placehold.jp/400x400.png?text=image'
+        },
+        el_btn: {
+          ex_class: 'el_btn__red',
+          ttl: 'Click me',
+          url: '#'
+        }
+      } %}
+      {{ macros.bl_half(bl_half_data) }}
+    {%- endcall %}
+    {# bl_sect #}
+  {%- endcall %}
+  {# ly_body #}
+</div>
+<!-- /.hp_bgcCherryBlossom -->
+
+
+{# ==========================================================================
+  Section 2
+  ========================================================================== #}
+{%- call macros.ly_body() %}
+  {%- call macros.bl_sect() %}
+    {%- set el_sectTtl_data = {
+      ttl: 'Mixin Grid'
+    } %}
+    {{ macros.el_sectTtl(el_sectTtl_data) }}
+    <p>最低限やることはこれだけ。</p>
+    <pre style="padding: 10px; margin: 20px 0; background-color: #efefef; font-size: 14px;">
+.bl_cardUnit {
+  @include makeChildColum(
+    $lc: 4,
+    $lh: 20
+  );
+}</pre>
+
+    <p>やれることは、これだけ。</p>
+    <pre style="padding: 10px; margin: 20px 0; background-color: #efefef; font-size: 14px;">
+.bl_cardUnit {
+  @include makeChildColum(
+    $lc: 4,                //PCビュー時のカラム数
+    $lh: 20,               //PCビュー時の水平ガター
+    $lv: 50,               //PCビュー時の垂直ガター
+    $mc: 3,                //タブレットビュー時のカラム数
+    $mh: 30,               //タブレットビュー時の水平ガター
+    $mv: 40,               //タブレットビュー時の垂直ガター
+    $sc: 2,                //SPビュー時のカラム数
+    $sh: 10,               //SPビュー時の水平ガター
+    $sv: 40,               //SPビュー時の垂直ガター
+    $display: flex,        //レイアウトスタイルの指定（flex or float or inline-block- or inline-table）
+    $h-perc: true,         //水平ガター%化の可否
+    $v-perc: false,        //垂直ガター%化の可否
+    $childElm: '.bl_card'  //カラムを形成したい子要素の指定（デフォルト：> *）
+  );
+}</pre>
+
+    {%- call macros.bl_cardUnit() %}
+      {%- set bl_card_data = [
+        {
+          img: {
+            src: 'http://placehold.jp/400x300.png?text=image'
+          },
+          ttl: 'Anything can come here',
+          txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        },
+        {
+          img: {
+            src: 'http://placehold.jp/400x300.png?text=image'
+          },
+          ttl: 'Anything can come here',
+          txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        },
+        {
+          img: {
+            src: 'http://placehold.jp/400x300.png?text=image'
+          },
+          ttl: 'Anything can come here',
+          txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        },
+        {
+          img: {
+            src: 'http://placehold.jp/400x300.png?text=image'
+          },
+          ttl: 'Anything can come here',
+          txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        }
+      ] %}
+      {{ macros.bl_card(bl_card_data) }}
+    {%- endcall %}
+    {# bl_cardUnit #}
+  {%- endcall %}
+  {# bl_sect #}
+{%- endcall %}
+{# ly_body #}
+
+{# ==========================================================================
+  Section 3
+  ========================================================================== #}
+<div class="hp_bgcCherryBlossom">
+  {%- set ly_body_data = {
+    tag: 'section',
+    ex_class: 'hp_bgcGray'
+  } %}
+  {%- call macros.ly_body(ly_body_data) %}
+    {%- call macros.bl_sect() %}
+    {%- set el_sectTtl_data = {
+        ttl: 'Strict Grid'
+      } %}
+      {{ macros.el_sectTtl(el_sectTtl_data) }}
+
+      <p>ガターパターンが厳密に決まっていれば、こちらを使うこともできます。<br>使いそうになければ_grid.scssのインクルードを解除してください。</p>
+      <pre style="padding: 10px; margin: 20px 0; background-color: #efefef; font-size: 14px;">
+# 使い方
+カスタマイズ変数は_grid.scss内に定義しています
+
+## イニシャライズ
+カラム化したい子要素のラッパーに 'gr_wrapper' クラスを付けます
+
+## カラムナンバーの選択
+この数字の最大値は $maxColNum 変数に依存しています。
+
+* gr_wrapper__col2
+* gr_wrapper__col3
+* gr_wrapper__col4 ...
+
+&lt;div class="gr_wrapper gr_wrapper__col4"&gt;
+
+## ガターパターンの選択
+_grid.scss内の $gutterValues 変数から希望のガターパターンを選択します。
+これらの名前、及びガター値はカスタマイズ可能で、パターンを増やすことも可能です。
+defaultの場合は特にクラスの追加の必要はありません。
+
+* gr_wrapper__xNarrow
+* gr_wrapper__narrow
+* gr_wrapper__wide
+* gr_wrapper__xWide
+
+&lt;div class="gr_wrapper gr_wrapper__col4 gr_wrapper__wide"&gt;
+
+## メディアクエリ時のカラム数の選択
+mdは_vars.scss内の $breakpoints のmに、smはsに該当します。
+
+* gr_wrapper__mdCol2
+* gr_wrapper__mdCol3
+* gr_wrapper__smCol2
+* gr_wrapper__smCol3 ...
+
+&lt;div class="gr_wrapper gr_wrapper__col4 gr_wrapper__wide gr_wrapper__mdCol3 gr_wrapper__smCol2"&gt
+
+## レイアウトスタイルの選択
+プロジェクト開始時に_grid.scss内の $display変数を定義すると、以後そのスタイルが標準で使用されます。
+ただし状況により他のスタイルを使いたい場合は、モディファイアを追加することで一時的にそれを使用することも可能です。
+
+* gr_wrapper__float
+* gr_wrapper__inlineTable
+* gr_wrapper__inlineBlock
+* gr_wrapper__flex
+
+&lt;div class="gr_wrapper gr_wrapper__col4 gr_wrapper__wide gr_wrapper__mdCol3 gr_wrapper__smCol2 gr_wrapper__inlineTable"&gt
+「PCビュー時は4カラム、タブレットビュー時は3カラム、SPビュー時は2カラム、ガターパターンはwideでinline-tableでレイアウトを行う」
+
+## That's it!
+This is the one ↓</pre>
+      {%- set gr_wrapper_data = {
+        ex_class: 'gr_wrapper__col4 gr_wrapper__wide gr_wrapper__mdCol3 gr_wrapper__smCol2 gr_wrapper__inlineTable'
+      } %}
+      {%- call macros.gr_wrapper(gr_wrapper_data) %}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_bordered_data = {
+            txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, culpa deleniti dignissimos dolore et expedita fugit harum illum magni nesciunt odio pariatur perferendis praesentium quidem tempora tempore ut voluptas.'
+          } %}
+          {{ macros.bl_bordered(bl_bordered_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_bgc_data = {
+            txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, culpa deleniti dignissimos dolore et expedita fugit harum illum magni nesciunt odio pariatur perferendis praesentium quidem tempora tempore ut voluptas.'
+          } %}
+          {{ macros.bl_bgc(bl_bgc_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+        {%- call macros.gr_col(gr_col_data) %}
+          {%- set bl_card_data = [
+            {
+              img: {
+                src: 'http://placehold.jp/400x300.png?text=image'
+              },
+              ttl: 'Anything can come in .gr_col',
+              txt: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            }
+          ] %}
+          {{ macros.bl_card(bl_card_data) }}
+        {%- endcall %}
+        {# gr_col #}
+      {%- endcall %}
+      {# gr_wrapper #}
+    {%- endcall %}
+    {# bl_sect #}
+  {%- endcall %}
+  {# ly_body #}
+</div>
+<!-- /.hp_bgcCherryBlossom -->
+
+
+
+
 
 {%- include './_inc/_footer.njk' %}
